@@ -1,56 +1,5 @@
 # Complaints App Baha Bilgin
 
-## Framework7 CLI Options
-
-Framework7 app created with following options:
-
-```
-{
-  "cwd": "/home/gulsima/Documents/vue/projects/complaints-app",
-  "type": [
-    "cordova"
-  ],
-  "name": "Complaints App",
-  "framework": "vue",
-  "template": "single-view",
-  "bundler": "webpack",
-  "cssPreProcessor": "scss",
-  "theming": {
-    "customColor": true,
-    "color": "#5134ef",
-    "darkTheme": false,
-    "iconFonts": true,
-    "fillBars": true
-  },
-  "customBuild": false,
-  "webpack": {
-    "developmentSourceMap": true,
-    "productionSourceMap": true,
-    "hashAssets": true,
-    "preserveAssetsPaths": false,
-    "inlineAssets": true
-  },
-  "pkg": "com.web4north.complaintsapp",
-  "cordova": {
-    "folder": "cordova",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "plugins": [
-      "cordova-plugin-statusbar",
-      "cordova-plugin-keyboard",
-      "cordova-plugin-splashscreen",
-      "cordova-plugin-inappbrowser",
-      "cordova-plugin-device",
-      "cordova-plugin-file",
-      "cordova-plugin-media",
-      "cordova-plugin-safariviewcontroller"
-    ]
-  }
-}
-```
-
 ## NPM Scripts
 
 * 🔥 `start` - run development server
