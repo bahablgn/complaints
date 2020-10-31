@@ -78,10 +78,10 @@
 </template>
 <script>
   import { Device }  from 'framework7/framework7-lite.esm.bundle.js';
-  import AppHeader from './AppHeader'
+  import AppHeader from './components/AppHeader'
 
-  import cordovaApp from '../js/cordova-app.js';
-  import routes from '../js/routes.js';
+  import cordovaApp from './js/cordova-app.js';
+  import routes from './routes.js';
 
   export default {
     components: {
