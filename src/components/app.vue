@@ -1,5 +1,7 @@
 <template>
   <f7-app :params="f7params" >
+    <appHeader></appHeader>
+
 
   <!-- Left panel with cover effect-->
   <f7-panel left cover theme-dark>
@@ -76,10 +78,15 @@
 </template>
 <script>
   import { Device }  from 'framework7/framework7-lite.esm.bundle.js';
+  import AppHeader from './AppHeader'
+
   import cordovaApp from '../js/cordova-app.js';
   import routes from '../js/routes.js';
 
   export default {
+    components: {
+      AppHeader
+    },
     data() {
       return {
         // Framework7 Parameters
@@ -87,13 +94,8 @@
           id: 'com.web4north.complaintsapp', // App bundle ID
           name: 'Complaints App', // App name
           theme: 'auto', // Automatic theme detection
-
-
-
           // App routes
           routes: routes,
-
-
           // Input settings
           input: {
             scrollIntoViewOnFocus: Device.cordova && !Device.electron,
@@ -102,7 +104,7 @@
           // Cordova Statusbar settings
           statusbar: {
             iosOverlaysWebView: true,
-            androidOverlaysWebView: false,
+            androidOverlaysWebView: true,
           },
         },
         // Login screen data
