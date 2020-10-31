@@ -20,6 +20,21 @@
     "cordova-android": "cross-env TARGET=cordova cross-env NODE_ENV=development node ./build/build.js && cd cordova && cordova run android",
     "postinstall": "cpy ./node_modules/framework7-icons/fonts/*.* ./src/fonts/"
   },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "@vue/prettier"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
   "browserslist": [
     "Android >= 7",
     "IOS >= 11",
@@ -48,6 +63,8 @@
     "cpy-cli": "^3.1.1",
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.0",
+    "eslint": "^7.12.1",
+    "eslint-plugin-vue": "^7.1.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.2.1",
@@ -56,6 +73,7 @@
     "ora": "^5.1.0",
     "postcss-loader": "^4.0.4",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "2.1.2",
     "rimraf": "^3.0.2",
     "sass-loader": "^10.0.4",
     "style-loader": "^2.0.0",
