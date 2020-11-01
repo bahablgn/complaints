@@ -12,7 +12,7 @@
   </f7-panel>
 
   <!-- Right panel with reveal effect-->
-  <f7-panel right reveal theme-dark>
+  <f7-panel right cover theme-dark>
     <f7-view>
       <f7-page>
         <f7-navbar title="Right Panel"></f7-navbar>

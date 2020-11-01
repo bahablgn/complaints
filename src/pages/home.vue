@@ -138,7 +138,7 @@ export default {
       self.autocompleteSearchbar = app.autocomplete.create({
         openIn: 'dropdown',
         inputEl: '#searchbar-autocomplete input[type="search"]',
-        dropdownPlaceholderText: 'Type "Apple"',
+        dropdownPlaceholderText: 'Search for companies or complaints',
         source (query, render) {
           console.log(query)
           const results = []
