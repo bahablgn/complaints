@@ -1,6 +1,5 @@
 <template>
   <f7-app :params="f7params" >
-    <appHeader></appHeader>
 
   <!-- Left panel with cover effect-->
   <f7-panel left cover theme-dark>
@@ -74,14 +73,12 @@
 </template>
 <script>
 import { Device } from 'framework7/framework7-lite.esm.bundle.js'
-import AppHeader from './components/AppHeader'
 
 import cordovaApp from './js/cordova-app.js'
 import routes from './routes.js'
 
 export default {
   components: {
-    AppHeader
   },
   data () {
     return {
@@ -100,7 +97,7 @@ export default {
         // Cordova Statusbar settings
         statusbar: {
           iosOverlaysWebView: true,
-          androidOverlaysWebView: true
+          androidOverlaysWebView: false
         }
       },
       // Login screen data
@@ -120,6 +117,8 @@ export default {
       // Init cordova APIs (see cordova-app.js)
       if (Device.cordova) {
         cordovaApp.init(f7)
+        // eslint-disable-next-line no-undef
+        StatusBar.styleLightContent()
       }
       // Call F7 APIs here
     })
