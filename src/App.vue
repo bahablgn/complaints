@@ -1,33 +1,33 @@
 <template>
   <f7-app :params="f7params" >
-    <appHeader></appHeader>
-
 
   <!-- Left panel with cover effect-->
-  <f7-panel left cover theme-dark>
+  <!-- <f7-panel left cover theme-dark>
     <f7-view>
       <f7-page>
         <f7-navbar title="Left Panel"></f7-navbar>
         <f7-block>Left panel content goes here</f7-block>
       </f7-page>
     </f7-view>
-  </f7-panel>
-
+  </f7-panel> -->
 
   <!-- Right panel with reveal effect-->
-  <f7-panel right reveal theme-dark>
+  <f7-panel right cover>
     <f7-view>
       <f7-page>
         <f7-navbar title="Right Panel"></f7-navbar>
-        <f7-block>Right panel content goes here</f7-block>
+        <f7-block-title>Main View Navigation</f7-block-title>
+        <f7-list>
+          <a href="/about/" data-view=".view-main" class="panel-close"> asdasd </a>
+          <a href="/form/" data-view=".view-main" class="panel-close"> asdasd </a>
+          <f7-list-item @click="navigateTo('/form/')" link="/" title="Form" panel-close></f7-list-item>
+        </f7-list>
       </f7-page>
     </f7-view>
   </f7-panel>
 
-
   <!-- Your main view, should have "view-main" class -->
-  <f7-view main class="safe-areas" url="/"></f7-view>
-
+  <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="800"></f7-view>
 
     <!-- Popup -->
     <f7-popup id="my-popup">
@@ -77,56 +77,59 @@
   </f7-app>
 </template>
 <script>
-  import { Device }  from 'framework7/framework7-lite.esm.bundle.js';
-  import AppHeader from './components/AppHeader'
+import { Device } from 'framework7/framework7-lite.esm.bundle.js'
 
-  import cordovaApp from './js/cordova-app.js';
-  import routes from './routes.js';
+import cordovaApp from './js/cordova-app.js'
+import routes from './routes.js'
 
-  export default {
-    components: {
-      AppHeader
-    },
-    data() {
-      return {
-        // Framework7 Parameters
-        f7params: {
-          id: 'com.web4north.complaintsapp', // App bundle ID
-          name: 'Complaints App', // App name
-          theme: 'auto', // Automatic theme detection
-          // App routes
-          routes: routes,
-          // Input settings
-          input: {
-            scrollIntoViewOnFocus: Device.cordova && !Device.electron,
-            scrollIntoViewCentered: Device.cordova && !Device.electron,
-          },
-          // Cordova Statusbar settings
-          statusbar: {
-            iosOverlaysWebView: true,
-            androidOverlaysWebView: true,
-          },
+export default {
+  components: {
+  },
+  data () {
+    return {
+      // Framework7 Parameters
+      f7params: {
+        id: 'com.web4north.complaintsapp', // App bundle ID
+        name: 'Complaints App', // App name
+        theme: 'auto', // Automatic theme detection
+        // App routes
+        routes: routes,
+        // Input settings
+        input: {
+          scrollIntoViewOnFocus: Device.cordova && !Device.electron,
+          scrollIntoViewCentered: Device.cordova && !Device.electron
         },
-        // Login screen data
-        username: '',
-        password: '',
-      }
-    },
-    methods: {
-      alertLoginData() {
-        this.$f7.dialog.alert('Username: ' + this.username + '<br>Password: ' + this.password, () => {
-          this.$f7.loginScreen.close();
-        });
-      }
-    },
-    mounted() {
-      this.$f7ready((f7) => {
-        // Init cordova APIs (see cordova-app.js)
-        if (Device.cordova) {
-          cordovaApp.init(f7);
+        // Cordova Statusbar settings
+        statusbar: {
+          iosOverlaysWebView: true,
+          androidOverlaysWebView: false
         }
-        // Call F7 APIs here
-      });
+      },
+      // Login screen data
+      username: '',
+      password: ''
     }
+  },
+  methods: {
+    alertLoginData () {
+      this.$f7.dialog.alert('Username: ' + this.username + '<br>Password: ' + this.password, () => {
+        this.$f7.loginScreen.close()
+      })
+    },
+    navigateTo (to) {
+      this.$f7.views.main.router.navigate(to)
+    }
+  },
+  mounted () {
+    this.$f7ready((f7) => {
+      // Init cordova APIs (see cordova-app.js)
+      if (Device.cordova) {
+        cordovaApp.init(f7)
+        // eslint-disable-next-line no-undef
+        StatusBar.styleLightContent()
+      }
+      // Call F7 APIs here
+    })
   }
+}
 </script>
