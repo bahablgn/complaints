@@ -2,27 +2,32 @@
   <f7-app :params="f7params" >
 
   <!-- Left panel with cover effect-->
-  <f7-panel left cover theme-dark>
+  <!-- <f7-panel left cover theme-dark>
     <f7-view>
       <f7-page>
         <f7-navbar title="Left Panel"></f7-navbar>
         <f7-block>Left panel content goes here</f7-block>
       </f7-page>
     </f7-view>
-  </f7-panel>
+  </f7-panel> -->
 
   <!-- Right panel with reveal effect-->
-  <f7-panel right cover theme-dark>
+  <f7-panel right cover>
     <f7-view>
       <f7-page>
         <f7-navbar title="Right Panel"></f7-navbar>
-        <f7-block>Right panel content goes here</f7-block>
+        <f7-block-title>Main View Navigation</f7-block-title>
+        <f7-list>
+          <a href="/about/" data-view=".view-main" class="panel-close"> asdasd </a>
+          <a href="/form/" data-view=".view-main" class="panel-close"> asdasd </a>
+          <f7-list-item @click="navigateTo('/form/')" link="/" title="Form" panel-close></f7-list-item>
+        </f7-list>
       </f7-page>
     </f7-view>
   </f7-panel>
 
   <!-- Your main view, should have "view-main" class -->
-  <f7-view main class="safe-areas" url="/"></f7-view>
+  <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="800"></f7-view>
 
     <!-- Popup -->
     <f7-popup id="my-popup">
@@ -110,6 +115,9 @@ export default {
       this.$f7.dialog.alert('Username: ' + this.username + '<br>Password: ' + this.password, () => {
         this.$f7.loginScreen.close()
       })
+    },
+    navigateTo (to) {
+      this.$f7.views.main.router.navigate(to)
     }
   },
   mounted () {

@@ -20,14 +20,23 @@
 </template>
 
 <script>
+// import AddComplaint from './AddComplaint'
+
 export default {
+  components: {},
   data: () => ({
     show: false,
     users: []
   }),
   methods: {
     async fetchUser () {
-      const response = await fetch('https://randomuser.me/api/?results=10')
+      const response = await fetch('https://randomuser.me/api/?results=10', {
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      })
       const data = await response.json()
       console.log(data)
       this.users = data.results.map(user => ({

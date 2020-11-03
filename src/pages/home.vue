@@ -1,40 +1,8 @@
 <template>
-  <f7-page name="home" @page:beforeremove="onPageBeforeRemove">
-    <!-- <f7-navbar title="Autocomplete" back-link="Back">
-      <div class="subnavbar">
-        <form class="searchbar" id="searchbar-autocomplete">
-          <div class="searchbar-inner">
-            <div class="searchbar-input-wrap">
-              <input type="search" placeholder="Search" />
-              <i class="searchbar-icon"></i>
-              <span class="input-clear-button"></span>
-            </div>
-            <span class="searchbar-disable-button" v-if="!$theme.aurora">Cancel</span>
-          </div>
-        </form>
-      </div>
-    </f7-navbar> -->
-
-    <!-- <div class="navbar">
-      <div class="navbar-bg"></div>
-      <div class="navbar-inner">
-        <div class="left"><a href="#" class="link">
-            <div class="app-logo"><img src="images/app_logo_white.a24261.png"></div>
-          </a></div>
-        <div class="right"><a href="#" class="searchbar-enable link icon-only" data-searchbar=".searchbar-demo"><i
-              class="icon material-icons">search</i></a> <a href="#" data-panel="right"
-            class="link icon-only panel-open"><i class="icon material-icons">menu</i></a></div>
-        <form id="searchbar-autocomplete" class="searchbar-demo searchbar searchbar-expandable">
-          <div class="searchbar-inner">
-            <div class="searchbar-input-wrap"><input placeholder="Search" type="search"><i
-                class="searchbar-icon"></i><span class="input-clear-button"></span></div><span
-              class="searchbar-disable-button">Cancel</span>
-          </div>
-        </form>
-      </div>
-    </div> -->
-
-    <f7-navbar :sliding="false">
+  <div>
+    <AddComplaint />
+    <f7-page name="home">
+      <f7-navbar :sliding="false">
 
         <f7-nav-left>
           <f7-link>
@@ -50,61 +18,53 @@
             data-searchbar=".searchbar-demo"
             icon-ios="f7:search"
             icon-aurora="f7:search"
-            icon-md="material:search">
-          </f7-link>
+            icon-md="material:search"
+          ></f7-link>
 
-          <f7-link icon-ios="f7:menu" icon-aurora="f7:menu" icon-md="material:menu" panel-open="right"></f7-link>
+          <f7-link
+            icon-ios="f7:menu"
+            icon-aurora="f7:menu"
+            icon-md="material:menu"
+            panel-open="right"
+          ></f7-link>
         </f7-nav-right>
-        <!-- <f7-searchbar
-          id="searchbar-autocomplete"
-          class="searchbar-demo"
-          expandable
-          :disable-button="!$theme.aurora"
-        >
-        </f7-searchbar> -->
+
         <form class="searchbar-demo searchbar searchbar-expandable" id="searchbar-autocomplete">
           <div class="searchbar-inner">
-            <div class="searchbar-input-wrap">
-              <input type="search" placeholder="Search" class="no-fastclick" />
-              <i class="searchbar-icon"></i>
-              <!-- <span class="input-clear-button"></span> -->
-            </div>
-            <span class="searchbar-disable-button" v-if="!$theme.aurora">Cancel</span>
+          <div class="searchbar-input-wrap">
+            <input type="search" placeholder="Search" class="" />
+            <i class="searchbar-icon"></i>
+          </div>
+          <span class="searchbar-disable-button" v-if="!$theme.aurora">Cancel</span>
           </div>
         </form>
 
+       <!-- <f7-searchbar
+          id="searchbar-autocomplete"
+          class="searchbar-demo searchbar-init"
+          expandable
+          :clear-button=false
+          :disable-button="!this.$theme.aurora"
+        ></f7-searchbar> -->
+
       </f7-navbar>
-    <!-- <AppHeader /> -->
+      <!-- <AppHeader /> -->
+      <!-- Page content-->
+      <Complaints />
 
-    <!-- Page content-->
-    <Complaints />
-
-    <!-- FAB will morph to toolbar -->
-    <f7-fab position="right-bottom" morph-to=".demo-fab-fullscreen-sheet.fab-morph-target">
-      <f7-icon ios="f7:plus" aurora="f7:plus" md="material:add"></f7-icon>
-    </f7-fab>
-
-    <div class="demo-fab-fullscreen-sheet fab-morph-target" slot="fixed">
-      <f7-block-title>Choose Something</f7-block-title>
-      <div class="list links-list">
-        <ul>
-          <li><a href="#" class="fab-close">Link 1</a></li>
-          <li><a href="#" class="fab-close">Link 2</a></li>
-          <li><a href="#" class="fab-close">Link 3</a></li>
-          <li><a href="#" class="fab-close">Link 4</a></li>
-        </ul>
-      </div>
-    </div>
-  </f7-page>
+    </f7-page>
+  </div>
 </template>
 <script>
 // import AppHeader from '../components/AppHeader'
 import Complaints from '../components/Complaints'
+import AddComplaint from '../components/AddComplaint'
 
 export default {
   name: 'AppHeader',
   components: {
-    Complaints
+    Complaints,
+    AddComplaint
   },
   data () {
     return {
@@ -133,6 +93,7 @@ export default {
       const self = this
       const app = self.$f7
       const fruits = self.fruits
+      console.log('deneme')
 
       // Searchbar Autocomplete
       self.autocompleteSearchbar = app.autocomplete.create({
@@ -140,7 +101,7 @@ export default {
         inputEl: '#searchbar-autocomplete input[type="search"]',
         dropdownPlaceholderText: 'Search for companies or complaints',
         source (query, render) {
-          console.log(query)
+          // console.log(query)
           const results = []
           if (query.length === 0) {
             render(results)
@@ -179,12 +140,16 @@ export default {
       const self = this
       const app = self.$f7
       const $ = self.$$
+      console.log('burda')
 
       self.searchbar = app.searchbar.create({
         el: '#searchbar-autocomplete',
-        customSearch: true,
         on: {
+          search (sb, query, previousQuery) {
+            console.log(query, previousQuery)
+          },
           enable () {
+            console.log('searchbar a girdi')
             setTimeout(() => {
               if (app.theme === 'ios') {
                 $('#searchbar-autocomplete').css('overflow', 'visible')
@@ -210,6 +175,7 @@ export default {
           }
         }
       })
+      // app.searchbar.enable(self.searchbar)
     }
 
   },
@@ -219,6 +185,7 @@ export default {
     })
     this.$nextTick(() => {
       // this.onPageBeforeRemove()
+      // this.onPageInit()
       // this.onPageInit()
     })
   }
@@ -230,9 +197,9 @@ export default {
     padding-top: 22px;
   }
 
-  .demo-fab-fullscreen-sheet {
+  /* .demo-fab-fullscreen-sheet {
     left: 15px;
     right: 15px;
     top: calc(15px + var(--f7-safe-area-top));
-  }
+  } */
 </style>
